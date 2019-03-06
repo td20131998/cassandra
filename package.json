@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cassandra-driver": "^4.0.0"
+    "cassandra-driver": "^4.0.0",
+    "express": "^4.16.4",
+    "express-cassandra": "^2.3.0"
   }
 }

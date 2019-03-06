@@ -1,4 +1,13 @@
-Key concepts, data structures and algorithms:
+A/ Các bước cài đặt cassandra trên window:
+1. Cài đặt python và java bản mới nhất
+2. Set variable enviroment cho python và java (nếu cần)
+3. Lên trang chủ http://www.apache.org tải bản mới nhất apache-cassandra về (dạng apache-cassandra-3.11.4.bin.tar.gz)
+4. Giải nén vào ổ C hoặc bất cứ đâu
+5. Thêm vào Path của System variables rồi thêm mới đường dẫn đến apache-cassandra vừa giải nén
+6. Khởi chạy server cassandra: trong cmd: cassandra -f
+7. Mở 1 cmd khác để thực hiện query, tạo bảng các thứ
+
+B/ Key concepts, data structures and algorithms:
 1. Data Partitioning(Phân vùng dữ liệu): Là cơ sở dũ liệu duy nhất, ko chia sẻ như mysql. Dữ liệu được chia đều ra các cụm nút, mỗi nút có trách nhiệm lưu trữ 1 phần dữ liệu nào đó. Hành động phân phối dữ liệu trên các nút gọi là "Phân vùng dữ liệu"
 => Tại sao cassandra lại nhanh? Vì nó thống nhất, tất cả dữ liệu được lưu trữ trong 1 database duy nhất cho 1 hệ thống. Mysql có thế chia sẻ: nghĩa là ở các công ty khác nhau có các database khác nhau hoàn toàn có thể lấy dữ liệu từ nhau. Việc chia sẻ làm query lâu hơn.
 
