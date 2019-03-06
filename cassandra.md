@@ -33,4 +33,5 @@ B/ Key concepts, data structures and algorithms:
 
 => Cassandra được phát triển trong một môi trường DC nên data cần được replica 1 cách thông minh để tránh lỗi. Data phải được replica tới server ở một rack khác hiện tại để  đảm bảo không có lỗi. Có thể dễ dàng cấu hình hoạt động trong nhiều DC để  tránh lỗi và sự cố.
 
-8. Snitches and replication strategies(Chiến lược sao chép và nhân rộng): 
+8. Snitches(Các cách để nhân bản dữ liệu) and Replication strategies(Chiến lược nhân rộng): 
+- Snitches là một protocol sử dụng để mapping ip với racks và datacenter
