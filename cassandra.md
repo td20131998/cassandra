@@ -34,4 +34,36 @@ B/ Key concepts, data structures and algorithms:
 => Cassandra được phát triển trong một môi trường DC nên data cần được replica 1 cách thông minh để tránh lỗi. Data phải được replica tới server ở một rack khác hiện tại để  đảm bảo không có lỗi. Có thể dễ dàng cấu hình hoạt động trong nhiều DC để  tránh lỗi và sự cố.
 
 8. Snitches(Các cách để nhân bản dữ liệu) and Replication strategies(Chiến lược nhân rộng): 
-- Snitches là một protocol sử dụng để mapping ip với racks và datacenter
+- Snitches là giao thức để xác định độ gần nhau của các nút trong 1 ring
+- Replication strategies sử dụng thông tin về khoảng cách mà Stitches cung cấp để xác định 1 cụm có cùng trạng thái (cùng bản sao)
+
+9. Gossip protocol(Giao thức tin đồn ???): Giao thức trao đổi thông tin trạng thái giữa các nút trong một cụm. Một nút không giao tiếp với mọi nút để tránh nghẽn mạng, 1 nút chỉ giao tiếp tối đa với 3 nút khác và trong một chu kì trạng thái của các nút được truyền đi khắp cụm. 
+=> Dùng để phát hiện lỗi
+=> Tại sao ?
+
+10. Bloom filters(Bộ lọc Bloom): Trành trùng lặp dữ liệu
+
+11. Merkle tree: Tìm sự khác biệt giữa các nút => để cập nhập?(maybe)
+
+12. SSTable(Sorted String Table): Lưu trữ các mảnh dữ liệu lớn trong một tệp
+
+13. Write back cache(Ghi lại cache): Chưa thấy gì hay
+
+14. Memtable: 1 memtable là một bộ đệm ghi lại nằm trong bộ nhớ chưa được xóa trong đĩa
+
+15. Keyspace: Tương tự như schema trong mysql, để định nghĩa 1 keyspace phải chỉ ra Replication strategy và Replication factor như số lượng nút cần được nhân bản ra các nút khác.
+
+16. Column family(Cụm cột): Như bảng trong mysql.
+ - Sql: table(key, att1, att2): mảng 2 chiều gồm các cột và hàng, cột ứng với hàng là giá trị cuối cùng.
+ - Cassandra: columnFamily(Row(column1, column2, ...), Row(column1, ...)): danh sách các hàng với mỗi hàng gồm nhiều cột, cột là nơi lưu giá trị cuối cùng, column(name, value, clock)
+
+17. Row key: Khóa của một row chứa nhiều column, mỗi column được xác định qua row key và key của nó.
+
+C/ Cassandra Cluster/Ring (Cụm/Vòng)
+1. Cluster bootstrapping: Là hành động quản lí thông tin trạng thái các nút sử dụng Gossip protocol qua các nút chính.
+ - Một cluster sẽ được đăng kí 1 tên. Tất cả các node trong cluster đó sẽ có cùng tên. 
+ - Các nút chính sẽ khởi động cùng cluster để giao tiếp với các nút khác. 
+ - Thống tin trạng thái của node chính thay đổi từng giây và chứa thông tin về nó và các node khác
+=> cho phép các node biết thông tin về các node khác trong khi chỉ cần giao tiếp với 1 số node hữu hạn
+
+2. Cassandra ring:

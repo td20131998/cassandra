@@ -7,15 +7,19 @@ const client = new cassandra.Client({
     keyspace: 'people',
 });
 
-const query = 'SELECT * FROM subcribers WHERE first_name = ? ALOW FILTERING';
-const params = ['Tung Duong', 'Bob'];
+//Thong thuong
+// const query = "SELECT * FROM subcribers WHERE first_name = 'Tung Duong' ALLOW FILTERING";
+// client.execute(query, (err, result) => {
+//     assert.ifError(err);
+//     console.log(result.first());
+// });
 
-client.connect((err) => {
+//Voi tham so
+const query1 = 'SELECT * FROM subcribers WHERE first_name = ? ALLOW FILTERING';
+client.execute(query1, ['Bob'], (err, result) => {
     assert.ifError(err);
+    console.log(result.rows);
 });
 
-client.execute(query, params, { prepare: true }).then((err, result) => {
-    if (err) assert.ifError(err);
-    let user = result;
-    console.log(user);
-})
+const insert = 'INSERT INTO subcribers(id, email, first_name, last_name) VALUES(now(), ?, ?, ?)';
+client.execute(insert, ['tungbx@vnu.edu.vn', 'Xuan Tung', 'Bui']);
